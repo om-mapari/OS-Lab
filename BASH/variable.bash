@@ -1,0 +1,13 @@
+#echo -e "2) Variable \na) local variabel \nb) Environmental Variable \nc) Shell Variable"
+echo "Defining Variable"
+college="PICT"
+echo "My college is $college"
+
+echo -e "\n=========================================\n"
+echo "Special Variable"
+echo "File name : $0"
+echo "First parameter : $1"
+echo "Third parameter : $3"
+echo "Quated Values @ : $@"
+echo "Quated Values * : $*"
+echo "No of parameter : $#"
