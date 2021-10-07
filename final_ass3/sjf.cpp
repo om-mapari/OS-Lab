@@ -198,7 +198,6 @@ int main()
 	{
 		sum += time[i];
 		cout << sum << "\t\t";
-
 	}
 }
 
