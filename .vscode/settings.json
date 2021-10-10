@@ -4,6 +4,7 @@
         "ostream": "cpp",
         "stdlib.h": "c",
         "math.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "random": "c"
     }
 }
