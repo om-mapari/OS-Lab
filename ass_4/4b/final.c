@@ -15,7 +15,7 @@ void reader(void *arg)
     readcount++; // make sure only one reader increment readcount
     pthread_mutex_unlock(&mutex);
 
-    if (readcount == 1) // if he is first reader then only he will lock writer
+    if (readcount == 1) // if reader is first reader then only reader will lock writer
         // because it is possible that if writer is in C.S then reader shouldnt allow in C.S
         pthread_mutex_lock(&wr);
 
