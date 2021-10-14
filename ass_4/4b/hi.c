@@ -18,9 +18,7 @@ void reader(void *arg)
     if (readcount == 1) 
         pthread_mutex_lock(&wr);
 
-    pthread_t self_id;
-    self_id = pthread_self();
-    printf("\n Reader %ld with thread id (%lu) is in critical section", num,self_id);
+    printf("\n Reader %ld is in critical section", num);
     printf("\n Reader %ld is reading data %d", num, a);
     sleep(1);
 
@@ -31,22 +29,19 @@ void reader(void *arg)
         pthread_mutex_unlock(&wr);
 
     printf("\n Reader %ld left critical section", num);
-    printf("\n");
 }
 void writer(void *arg)
 {
     long int num = (long int)arg;
-    pthread_mutex_lock(&wr);
-
-    pthread_t self_id;
-    self_id = pthread_self();    
-    printf("\n Writer %ld with thread id (%lu) is in critical section", num,self_id);
+    pthread_mutex_lock(&wr);  
+    
+    printf("\n Writer %ld is in critical section", num);
 
     printf("\n Writer %ld have written data as %d", num, ++a);
     sleep(1);
 
     printf("\n Writer %ld left critical section", num);
-    printf("\n");
+
     pthread_mutex_unlock(&wr); 
 }
 int main()
