@@ -63,13 +63,13 @@ int main()
         {
             if (completed[i] == 0) // if not completed
             {
-                process = i; // Process Value updated
+                process = i; // process selected
                 for (j = 0; j < r; j++)
                 {
-                    if (available[j] <= need[i][j]) // for each Resource of need matrix availability checked
+                    if (available[j] <= need[i][j]) // for each resouse if avalibality is <= need 
                     {
-                        process = -1; //  if one of resource is having higher value then RESET default value
-                        break;
+                        process = -1;  //*unselect
+                        break; // there is no use to waste time
                     }
                 }
             }
