@@ -42,20 +42,20 @@ int main()
 
     do
     {
-        printf("\nMax matrix:\tAllocation matrix:\n");
+        // printf("\nMax matrix:\tAllocation matrix:\n");
 
-        for (i = 0; i < p; i++)
-        {
-            for (j = 0; j < r; j++)
-                printf("%d ", Max[i][j]);
+        // for (i = 0; i < p; i++)
+        // {
+        //     for (j = 0; j < r; j++)
+        //         printf("%d ", Max[i][j]);
 
-            printf("\t\t");
+        //     printf("\t\t");
 
-            for (j = 0; j < r; j++)
-                printf("%d ", allocation[i][j]);
+        //     for (j = 0; j < r; j++)
+        //         printf("%d ", allocation[i][j]);
 
-            printf("\n");
-        }
+        //     printf("\n");
+        // }
 
         process = -1; // For Each loop eligible process variable set = -1
 
