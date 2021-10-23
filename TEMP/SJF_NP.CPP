@@ -108,7 +108,7 @@ int main()
 
     cout << endl
          << endl;
-
+ 
     cout << "#P\t"
          << "AT\t"
          << "BT\t"

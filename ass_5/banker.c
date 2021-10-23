@@ -1,8 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 20
+void init_code() {
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+}
 int main()
 {
+    init_code();
     int Max[MAX][MAX], need[MAX][MAX], allocation[MAX][MAX], available[MAX], completed[MAX], safeSequence[MAX];
     int p, r, i, j, process, count;
     count = 0;
@@ -16,14 +23,6 @@ int main()
     printf("\n\nEnter the no of resources : ");
     scanf("%d", &r);
 
-    printf("\n\nEnter the Max Matrix for each process : ");
-    for (i = 0; i < p; i++)
-    {
-        printf("\nFor process %d : ", i + 1);
-        for (j = 0; j < r; j++)
-            scanf("%d", &Max[i][j]);
-    }
-
     printf("\n\nEnter the allocation for each process : ");
     for (i = 0; i < p; i++)
     {
@@ -31,7 +30,13 @@ int main()
         for (j = 0; j < r; j++)
             scanf("%d", &allocation[i][j]);
     }
-
+    printf("\n\nEnter the Max Matrix for each process : ");
+    for (i = 0; i < p; i++)
+    {
+        printf("\nFor process %d : ", i + 1);
+        for (j = 0; j < r; j++)
+            scanf("%d", &Max[i][j]);
+    }
     printf("\n\nEnter the Current Available Resources with OS : ");
     for (i = 0; i < r; i++)
         scanf("%d", &available[i]);
@@ -40,57 +45,28 @@ int main()
         for (j = 0; j < r; j++)
             need[i][j] = Max[i][j] - allocation[i][j];
 
-    do
-    {
-        // printf("\nMax matrix:\tAllocation matrix:\n");
 
-        // for (i = 0; i < p; i++)
-        // {
-        //     for (j = 0; j < r; j++)
-        //         printf("%d ", Max[i][j]);
+    while (count != p && process != -1) {
+        for (int i = 0; i < p; i++) { // check for each process 
+            if (completed[i] == 0) { // if that process not completed
 
-        //     printf("\t\t");
-
-        //     for (j = 0; j < r; j++)
-        //         printf("%d ", allocation[i][j]);
-
-        //     printf("\n");
-        // }
-
-        process = -1; // For Each loop eligible process variable set = -1
-
-        for (i = 0; i < p; i++)
-        {
-            if (completed[i] == 0) // if not completed
-            {
-                process = i; // process selected
-                for (j = 0; j < r; j++)
-                {
-                    if (available[j] <= need[i][j]) // for each resouse if avalibality is <= need 
-                    {
-                        process = -1;  //*unselect
-                        break; // there is no use to waste time
+                int flag = 0;
+                for (int j = 0; j < r; j++) {
+                    if (need[i][j] > available[j]) {
+                        flag = 1;
+                        break;
                     }
                 }
-            }
-            if (process != -1)
-                break;
-        }
 
-        if (process != -1)
-        {
-            printf("\nProcess %d runs to completion!", process + 1);
-            safeSequence[count] = process + 1;
-            count++; // increment count of completed process
-            for (j = 0; j < r; j++)
-            {
-                available[j] += allocation[process][j];
-                allocation[process][j] = 0; // allocation turned to zero
-                Max[process][j] = 0;
-                completed[process] = 1; // mark completed process
+                if (flag == 0) {
+                    safeSequence[count++] = i;
+                    for (int y = 0; y < r; y++)
+                        available[y] += allocation[i][y];
+                    completed[i] = 1;
+                }
             }
         }
-    } while (count != p && process != -1);
+    }
 
     if (count == p)
     {
@@ -103,3 +79,19 @@ int main()
     else
         printf("\nThe system is in an unsafe state!!");
 }
+
+// The system is in a safe state!!
+// Safe Sequence : < 1 3 4 0 2 >
+// 5
+// 3
+// 0 1 0
+// 2 0 0
+// 3 0 2
+// 2 1 1
+// 0 0 2
+// 7 5 3
+// 3 2 2 
+// 9 0 2
+// 2 2 2
+// 4 3 3
+// 3 3 2
