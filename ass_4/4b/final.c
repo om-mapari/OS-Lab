@@ -12,11 +12,10 @@ void reader(void *arg)
     long int num = (long int)arg;
 
     pthread_mutex_lock(&mutex);
-    readcount++; // make sure only one reader increment readcount
+    readcount++; 
     pthread_mutex_unlock(&mutex);
 
-    if (readcount == 1) // if reader is first reader then only reader will lock writer
-        // because it is possible that if writer is in C.S then reader shouldnt allow in C.S
+    if (readcount == 1) 
         pthread_mutex_lock(&wr);
 
     printf("\n Reader %ld is in critical section", num);
@@ -24,9 +23,9 @@ void reader(void *arg)
     sleep(1);
 
     pthread_mutex_lock(&mutex);
-    readcount--; // make sure only one reader decrement readcount
+    readcount--; 
     pthread_mutex_unlock(&mutex);
-    if (readcount == 0) // make sure last reader will unlock writer
+    if (readcount == 0) 
         pthread_mutex_unlock(&wr);
 
     printf("\n Reader %ld left critical section", num);
@@ -34,7 +33,7 @@ void reader(void *arg)
 void writer(void *arg)
 {
     long int num = (long int)arg;
-    pthread_mutex_lock(&wr); // writer will lock wr variable 
+    pthread_mutex_lock(&wr);
     
     printf("\n Writer %ld is in critical section", num);
 
@@ -43,7 +42,7 @@ void writer(void *arg)
 
     printf("\n Writer %ld left critical section", num);
 
-    pthread_mutex_unlock(&wr); // writer will lock wr variable 
+    pthread_mutex_unlock(&wr); 
 }
 int main()
 {

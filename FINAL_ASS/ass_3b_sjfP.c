@@ -76,20 +76,20 @@ int main()
     int vcount = 0;
     while (completed != n)
     {
-        int idx = -1;      //selected process id
-        int mn = 10000000; //minimum
-        for (int i = 0; i < n; i++) // finding a process in readyQueue which process has minimum burst time
+        int idx = -1;      
+        int mn = 10000000; 
+        for (int i = 0; i < n; i++) 
         {
-            //which process has arrivied in ready queue && p completed or not
+            
             if (p[i].arrival_time <= current_time && is_completed[i] == 0)
             {
                 if (burst_remaining[i] < mn)
-                { // finding minimum burst time and set idS
+                { 
                     mn = burst_remaining[i];
                     idx = i;
                 }
                 if (burst_remaining[i] == mn)
-                { // if two process having same burst time then check arrival time & set idS
+                { 
                     if (p[i].arrival_time < p[idx].arrival_time)
                     {
                         mn = burst_remaining[i];
@@ -99,7 +99,7 @@ int main()
             }
         }  
 
-        if (idx != -1) // idx process selected
+        if (idx != -1) 
         { 
 
             v[vcount++] = p[idx].pid;
@@ -111,7 +111,7 @@ int main()
             burst_remaining[idx] -= 1;
             current_time++;
 
-            if (burst_remaining[idx] == 0) // process completed
+            if (burst_remaining[idx] == 0)
             {
                 p[idx].completion_time = current_time;
                 p[idx].turnaround_time = p[idx].completion_time - p[idx].arrival_time;  // TAT = CT - AT

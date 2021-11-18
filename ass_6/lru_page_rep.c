@@ -1,13 +1,13 @@
 #include <stdio.h>
 int findLRU(int time[], int n)
 {
-    int i, minimum = time[0], pos = 0;
+    int i, min = time[0], pos = 0;
 
     for (i = 1; i < n; ++i)
     {
-        if (time[i] < minimum)
+        if (time[i] < min)
         {
-            minimum = time[i];
+            min = time[i];
             pos = i;
         }
     }

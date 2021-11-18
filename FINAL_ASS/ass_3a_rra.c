@@ -83,9 +83,9 @@ int main()
 
     sortP(p, n);
     int current_time = 0;
-    push(0); // running queue
+    push(0); 
     int completed = 0;
-    int mark[100]; // mark those who entered in running Queue
+    int mark[100]; 
     for (int i = 0; i < 100; i++)
     {
         mark[i] = 0;
@@ -105,26 +105,26 @@ int main()
         gantt[g++] = p[idx].pid;
         pop();
 
-        if (burst_remaining[idx] == p[idx].burst_time) // first time in readyQ
+        if (burst_remaining[idx] == p[idx].burst_time) 
         {
-            p[idx].start_time = max(current_time, p[idx].arrival_time); // set start point
+            p[idx].start_time = max(current_time, p[idx].arrival_time); 
             current_time = p[idx].start_time;
             if (st == -1)
                 st = current_time;
         }
 
-        if (burst_remaining[idx] - tq > 0) // normal where burst use
+        if (burst_remaining[idx] - tq > 0) 
         {
-            burst_remaining[idx] -= tq; // use tq burst time
+            burst_remaining[idx] -= tq; 
             current_time += tq;
             gantt_time[tn++] = tq;
         }
-        else // for b_r[idx] == 0 and // for b_r[idx] < 0
+        else 
         {
             gantt_time[tn++] = burst_remaining[idx];
             current_time += burst_remaining[idx];
             burst_remaining[idx] = 0;
-            completed++; // process totally completed
+            completed++; 
             p[idx].completion_time = current_time;
 
             p[idx].turnaround_time = p[idx].completion_time - p[idx].arrival_time;
@@ -136,7 +136,7 @@ int main()
             total_response_time += p[idx].response_time;
         }
 
-        for (int i = 1; i < n; i++) // push the processes back to ReadyQ form runningQ
+        for (int i = 1; i < n; i++)
         {
             if (burst_remaining[i] > 0 && p[i].arrival_time <= current_time && mark[i] == 0)
             {
@@ -145,12 +145,12 @@ int main()
             }
         }
 
-        if (burst_remaining[idx] > 0) // repushing the process in queue cause its burst remaining
-        {                             // else the process is done so dont push back in queue
+        if (burst_remaining[idx] > 0) 
+        {                             
             push(idx);
         }
 
-        if (empty()) // if empty search for those whose never been in runningQ and push back
+        if (empty()) 
         {
             for (int i = 1; i < n; i++)
             {
