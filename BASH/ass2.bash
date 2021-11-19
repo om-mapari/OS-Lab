@@ -18,7 +18,7 @@ echo "3. VIEW SORTED RECORD  "
 echo "4. DELETE RECORD"
 echo "5. MODIFY RECORD"
 echo "6. EXTI  "
-echo -n "ENTER CHOICE [1-4] : "
+echo -n "ENTER CHOICE [0-6] : "
 read choice
 case $choice in
   0) 	#creation of lab
@@ -30,14 +30,6 @@ case $choice in
 			echo  -e "NAME\t\tROLL NO\t\tBOOK NAME\n==============================================\n" >> $fileName #create file 
             echo "THE FILE WITH [$fileName] CREATED SUCCESSFULLY"
 		fi
-		;;
-
-  2)    #VIEW RECORD
-        cat $fileName 
-        ;;
-
-  3)	#VIEW SORTED RECORD
-		sort $fileName
 		;;
 
   1)    #INSERT RECORD
@@ -56,6 +48,15 @@ case $choice in
 			read flag
 		done
 		;;
+
+  2)    #VIEW RECORD
+        cat $fileName 
+        ;;
+
+  3)	#VIEW SORTED RECORD
+		sort $fileName
+		;;
+
 
   4)    #DELETE RECORD
   		echo -e "DELETE RECORD\nENTER NAME/ROLL NO"

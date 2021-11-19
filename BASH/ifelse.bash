@@ -2,6 +2,7 @@ echo "enter a : "
 read a
 echo "enter b : "
 read b
+
 if [ $a -eq $b ]
 then
     echo "$a is not equel to $b"
@@ -11,3 +12,6 @@ then
 else
     echo "$a is greater than $b"    
 fi  
+
+
+

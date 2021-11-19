@@ -5,14 +5,10 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-
-
 sem_t empty, full;
-
-
 pthread_mutex_t mutex;
 
-int buffer[5];
+int buffer[5]; 
 int count = 0;
 void producer(void *arg)
 {
@@ -20,7 +16,7 @@ void producer(void *arg)
 
     sem_wait(&empty);
 
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_lock(&mutex); 
 
     pthread_t self_id;
     self_id = pthread_self();
@@ -87,7 +83,7 @@ int main()
     unsigned long int i, j, k, l;
 
 
-    for (i = 0; i < np; i++)
+    for (i = 0; i < np; i++) 
     {
         pthread_create(&p[i], NULL, (void *)producer, (void *)i);
     }
@@ -97,7 +93,7 @@ int main()
     }
 
    
-    for (k = 0; k < np; k++)
+    for (k = 0; k < np; k++) // wait for thread to wait ex
     {
         pthread_join(p[k], NULL);
     }
@@ -105,4 +101,6 @@ int main()
     {
         pthread_join(c[l], NULL);
     }
+
+    pthread_mutex_destroy(&mutex);
 }

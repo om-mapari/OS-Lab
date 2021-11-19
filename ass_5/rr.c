@@ -62,13 +62,13 @@ int safety(int A[][10], int N[][10], int AV[1][10], int n, int m, int safeSequen
 {
 
 	int i, j, k, x = 0;
-	int F[10], copy[1][10];
+	int F[10], avaliable[1][10];
 	int count = 0, flag = 0;
 
 	for (i = 0; i < n; i++)
 		F[i] = 0;
 	for (i = 0; i < m; i++)
-		copy[0][i] = AV[0][i]; // copy of avaliable
+		avaliable[0][i] = AV[0][i]; // avaliable of avaliable
 
 	for (k = 0; k < n; k++)
 	{
@@ -79,14 +79,14 @@ int safety(int A[][10], int N[][10], int AV[1][10], int n, int m, int safeSequen
 				flag = 0;
 				for (j = 0; j < m; j++)
 				{
-					if (N[i][j] > copy[0][j])
-						flag = 1; // need is more
+					if (N[i][j] > avaliable[0][j])
+						flag = 1; // need is more so break
 				}
 				
 				if (flag == 0 && F[i] == 0)
 				{
 					for (j = 0; j < m; j++)
-						copy[0][j] += A[i][j];
+						avaliable[0][j] += A[i][j];
 					F[i] = 1;
 					count++;
 					safeSequence[x++] = i; // add in safe seq
