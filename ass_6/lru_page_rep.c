@@ -1,4 +1,5 @@
 #include <stdio.h>
+// Least Recently Used
 int findLRU(int time[], int n)
 {
     int i, min = time[0], pos = 0;
@@ -98,22 +99,23 @@ int main()
     printf("\nMISS ratio = %f", (double)(fault_counter) / n);
     return 0;
 }
-// ENTER THE NUMBER OF PAGES:
-// 10
 
-//  ENTER THE PAGE NUMBER :
-// 4 7 6 1 7 6 1 2 7 2
+//  ENTER THE NUMBER OF PAGES:
+// 5
 
+//  ENTER THE REFERENCE_STRING :
+// 2 3 2 1 7
 
-// Enter number of frames: 3
-// Enter number of pages: 5
-// Enter reference string: 2 3 2 1 7
+//  ENTER THE NUMBER OF FRAMES :3
 
-// 2       -1      -1
-// 2       3       -1
-// 2       3       -1
-// 2       3       1
-// 2       7       1
+// REFERENCE_STRING        PAGE-FRAMES             HIT/FAULT
+// 2                       2       -1      -1      FAULT
+// 3                       2       3       -1      FAULT
+// 2                       2       3       -1      HIT
+// 1                       2       3       1       FAULT
+// 7                       2       7       1       FAULT
 
-// Total Page Faults = 4
-// d:\Coding\OS Lab\ass_6>
+// Page Fault occurred = 4
+// Totel HIT occurred = 1
+// HIT ratio = 0.200000
+// MISS ratio = 0.800000

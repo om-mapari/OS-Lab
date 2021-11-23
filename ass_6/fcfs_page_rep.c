@@ -54,15 +54,23 @@ int main()
     printf("\nMISS ratio = %f", (double)(fault_counter) / n);
     return 0;
 }
-// ENTER THE NUMBER OF PAGES:
+
+//  ENTER THE NUMBER OF PAGES:
 // 5
 
-//  ENTER THE PAGE NUMBER :
+//  ENTER THE REFERENCE_STRING :
 // 2 3 2 1 7
 
+//  ENTER THE NUMBER OF FRAMES :3
 
-// 2       -1      -1
-// 2       3       -1
-// 2       3       -1
-// 2       3       1
-// 2       7       1
+// REFERENCE_STRING        PAGE-FRAMES             HIT/FAULT
+// 2                       2       -1      -1      FAULT
+// 3                       2       3       -1      FAULT
+// 2                       2       3       -1      HIT
+// 1                       2       3       1       FAULT
+// 7                       7       3       1       FAULT
+
+// Page Fault occurred = 4
+// Totel HIT occurred = 1
+// HIT ratio = 0.200000
+// MISS ratio = 0.800000

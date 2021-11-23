@@ -46,3 +46,10 @@ int main()
     printf("Page Fault Is %d", fcount);
     return 0;
 }
+
+// TWO CASES 
+// Case I:  if (hit)
+//          do nothing
+// Case II: else (fault) 
+//          add it in frame[i]
+//          update J for next cycle
