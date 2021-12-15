@@ -1,14 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void init_code()
-{
-#ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	freopen("output.txt", "w", stdout);
-#endif
-}
-
 //print matrix
 void print(int x[][10], int n, int m)
 {
@@ -68,7 +60,7 @@ int safety(int A[][10], int N[][10], int AV[1][10], int n, int m, int safeSequen
 	for (i = 0; i < n; i++)
 		F[i] = 0;
 	for (i = 0; i < m; i++)
-		avaliable[0][i] = AV[0][i]; // avaliable of avaliable
+		avaliable[0][i] = AV[0][i]; // copy of avaliable
 
 	for (k = 0; k < n; k++)
 	{
@@ -164,7 +156,6 @@ int banker(int A[][10], int N[][10], int AV[1][10], int n, int m)
 
 int main()
 {
-	init_code();
 	int safetyAlgo;
 	int A[10][10],M[10][10],N[10][10],AV[1][10];
 	int n, m, pid, ch;

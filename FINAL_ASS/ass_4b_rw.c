@@ -30,6 +30,7 @@ void reader(void *arg)
 
     printf("\n Reader %ld left critical section", num);
 }
+
 void writer(void *arg)
 {
     long int num = (long int)arg;
@@ -44,6 +45,7 @@ void writer(void *arg)
 
     pthread_mutex_unlock(&wr); 
 }
+
 int main()
 {
 

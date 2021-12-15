@@ -7,6 +7,8 @@
         "stdio.h": "c",
         "random": "c",
         "types.h": "c",
-        "thread": "c"
-    }
+        "thread": "c",
+        "semaphore.h": "c"
+    },
+    "cmake.configureOnOpen": false
 }

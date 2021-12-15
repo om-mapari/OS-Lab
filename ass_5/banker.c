@@ -1,15 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 20
-void init_code() {
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
-}
+
 int main()
 {
-    init_code();
+    
     int Max[MAX][MAX], need[MAX][MAX], allocation[MAX][MAX], available[MAX], completed[MAX], safeSequence[MAX];
     int p, r, i, j, process, count;
     count = 0;

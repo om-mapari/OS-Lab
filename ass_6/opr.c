@@ -1,0 +1,147 @@
+#include <stdio.h>
+int main()
+{
+    int no_of_frames, no_of_pages, frames[10], pages[30], temp[10], flag1, flag2, flag3, i, j, k, pos, max, faults = 0;
+    printf("Enter number of frames: ");
+    scanf("%d", &no_of_frames);
+
+    printf("Enter number of pages: ");
+    scanf("%d", &no_of_pages);
+
+    printf("Enter page reference string: ");
+
+    for (i = 0; i < no_of_pages; ++i)
+    {
+        scanf("%d", &pages[i]);
+    }
+
+    for (i = 0; i < no_of_frames; ++i)
+    {
+        frames[i] = -1;
+    }
+
+    for (i = 0; i < no_of_pages; ++i)
+    {
+        flag1 = flag2 = 0;
+
+        // case 1 : hit
+        for (j = 0; j < no_of_frames; ++j)
+        {
+            if (frames[j] == pages[i])
+            {
+                flag1 = flag2 = 1;
+                break;
+            }
+        }
+
+        // case 2 : page fault + free frame
+        if (flag1 == 0)
+        {
+            for (j = 0; j < no_of_frames; ++j)
+            {
+                if (frames[j] == -1)
+                {
+                    faults++;
+                    frames[j] = pages[i];
+                    flag2 = 1;
+                    break;
+                }
+            }
+        }
+        
+        // case 3 : page fault + no free frame
+        if (flag2 == 0)
+        {
+            flag3 = 0;
+
+            for (j = 0; j < no_of_frames; ++j)
+            {
+                temp[j] = -1;
+
+                for (k = i + 1; k < no_of_pages; ++k)
+                {
+                    if (frames[j] == pages[k])
+                    {
+                        temp[j] = k;
+                        break;
+                    }
+                }
+            }
+            printf("\n HI ");
+            for (j = 0; j < no_of_frames; ++j)
+        {
+            printf("%d\t", temp[j]);
+        }
+            
+            
+            printf("\n");
+
+            for (j = 0; j < no_of_frames; ++j)
+            {
+                if (temp[j] == -1)
+                {
+                    pos = j;
+                    flag3 = 1;
+                    break;
+                }
+            }
+
+            if (flag3 == 0)
+            {
+                max = temp[0];
+                pos = 0;
+
+                for (j = 1; j < no_of_frames; ++j)
+                {
+                    if (temp[j] > max)
+                    {
+                        max = temp[j];
+                        pos = j;
+                    }
+                }
+            }
+            frames[pos] = pages[i];
+            faults++;
+        }
+
+        printf("\n");
+
+        for (j = 0; j < no_of_frames; ++j)
+        {
+            printf("%d\t", frames[j]);
+        }
+    }
+
+    printf("\n\nTotal Page Faults = %d", faults);
+
+    return 0;
+}
+
+// Enter number of frames: 3
+// Enter number of pages: 5
+// Enter page reference string: 2 3 2 1 7
+
+// 2       -1      -1
+// 2       3       -1
+// 2       3       -1
+// 2       3       1
+// 7       3       1
+
+// Total Page Faults = 4
+
+// Enter number of frames: 3
+// Enter number of pages: 10
+// Enter page reference string: 2 3 1 5 3 4 7 2 5 4
+
+// 2       -1      -1
+// 2       3       -1
+// 2       3       1   [ 7  4 -1]
+// 2       3       5   
+// 2       3       5   [ 7  -1  8]
+// 2       4       5   [ 7  9  8]
+// 2       7       5   
+// 2       7       5
+// 2       7       5   [-1 -1 -1]
+// 4       7       5
+
+// Total Page Faults = 7
